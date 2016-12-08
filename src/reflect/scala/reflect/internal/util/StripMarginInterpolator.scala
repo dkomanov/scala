@@ -36,6 +36,6 @@ trait StripMarginInterpolator {
       case head :: tail => head.stripMargin :: (tail map stripTrailingPart)
       case Nil => Nil
     }
-    new StringContext(stripped: _*).raw(args: _*)
+    new StringContext(stripped: _*).rawRaw(args: _*)
   }
 }

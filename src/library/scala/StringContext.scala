@@ -10,6 +10,7 @@ package scala
 
 import java.lang.{ StringBuilder => JLSBuilder }
 import scala.annotation.tailrec
+import scala.language.experimental.macros
 
 /** This class provides the basic mechanism to do String Interpolation.
  * String Interpolation allows users
@@ -92,7 +93,7 @@ case class StringContext(parts: String*) {
    *          if a `parts` string contains a backslash (`\`) character
    *          that does not start a valid escape sequence.
    */
-  def s(args: Any*): String = standardInterpolator(treatEscapes, args)
+  def s[A >: Any](args: A*): String = standardInterpolator(treatEscapes, args)
 
   /** The raw string interpolator.
    *
@@ -114,7 +115,9 @@ case class StringContext(parts: String*) {
    *          if the number of `parts` in the enclosing `StringContext` does not exceed
    *          the number of arguments `arg` by exactly 1.
    */
-  def raw(args: Any*): String = standardInterpolator(identity, args)
+  def raw[A >: Any](args: A*): String = macro ??? // standardInterpolator(identity, args)
+
+  def rawRaw(args: Any*): String = standardInterpolator(identity, args)
 
   def standardInterpolator(process: String => String, args: Seq[Any]): String = {
     checkLengths(args)

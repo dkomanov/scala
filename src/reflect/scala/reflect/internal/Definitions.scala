@@ -1475,7 +1475,9 @@ trait Definitions extends api.StandardDefinitions {
       // TODO: this misses Predef.any2stringadd
       def isStringAddition(sym: Symbol) = sym == String_+ || sym == StringAdd_+
 
-      lazy val StringContext_f = getMemberMethod(StringContextClass, nme.f)
+      lazy val StringContext_f   = getMemberMethod(StringContextClass, nme.f)
+      lazy val StringContext_s   = getMemberMethod(StringContextClass, nme.s)
+      lazy val StringContext_raw = getMemberMethod(StringContextClass, nme.raw_)
 
       lazy val ArrowAssocClass = getMemberClass(PredefModule, TypeName("ArrowAssoc")) // SI-5731
       def isArrowAssoc(sym: Symbol) = sym.owner == ArrowAssocClass

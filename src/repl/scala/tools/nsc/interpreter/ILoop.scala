@@ -767,7 +767,7 @@ class ILoop(in0: Option[BufferedReader], protected val out: JPrintWriter)
     def interpret(line: String) = intp interpret line
     def echo(message: String)   = ILoop.this echo message
 
-    val leadingElement = raw"(?s)\s*(package\s|/)".r
+    val leadingElement = rawRaw"(?s)\s*(package\s|/)".r
     def isPackaged(code: String): Boolean = {
       leadingElement.findPrefixMatchOf(code)
         .map(m => if (m.group(1) == "/") intp.parse.packaged(code) else true)
